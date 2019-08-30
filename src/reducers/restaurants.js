@@ -1,23 +1,20 @@
 import { ADD_RESTAURANTS } from '../constants/actionTypes';
 import get from 'lodash/get';
-import { restaurants, restaurantTypes } from '../data-orig';
+import { restaurants, restaurantTypes } from '../data';
 
-const fixedResults = restaurants.map(object => { return { ...object, image: `${object.image}` } });
+// const fixedResults = restaurants.map(object => { return { ...object, image: `${object.image}` } });
 
-console.log(fixedResults)
+// console.log(fixedResults)
 
-const INIT_RESTAURANTS_STATE = []
+const INIT_RESTAURANTS_STATE = restaurants.map(restaurant => ({
+    ...restaurantTypes.find((restaurantType) => (restaurant.type === restaurantType.type)),
+    ...restaurant
+}))
 
-const addRestaurantsReducerFunc = (state, action) => (
-  Object.assign({}, state, 
-    {
-      page: get(action.payload, 'page', 1), 
-      total_results: get(action.payload, 'total_results', 0), 
-      total_pages: get(action.payload, 'total_pages', 0), 
-      results: get(action.payload, 'results', [])
-    }
-  )
-)
+const addRestaurantsReducerFunc = (state, action) => {
+  return state
+}
+
 export function restaurantsReducer(state = INIT_RESTAURANTS_STATE, action) {
  switch (action.type) {
   case ADD_RESTAURANTS:

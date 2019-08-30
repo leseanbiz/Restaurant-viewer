@@ -8,7 +8,7 @@ export default function ViewCardsSwitch({viewCards, toggleCards}) {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<Switch size="large" checked={viewCards} onChange={toggleCards} />}
+        control={<Switch size="medium" checked={viewCards} onChange={toggleCards} />}
         label="Cards?"
         labelPlacement="top"
       />
