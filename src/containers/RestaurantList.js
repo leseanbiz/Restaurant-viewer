@@ -8,11 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import RestaurantListItem from '../components/RestaurantListItem'
 import { connect } from 'react-redux';
+import { Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
   return { restaurants: state.restaurantsReducer}
 }
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +37,10 @@ function RestaurantsList({restaurants}) {
       <Table className={classes.table}>
       <TableHead>
         <TableRow>
-          {headers.map(header => <TableCell align="center">{header}</TableCell>)}
+          {headers.map((header, i) => <TableCell variant="head" size="medium" align="center" key={i}>
+                                        <Typography variant="h6">{header.toUpperCase()}</Typography>
+                                      </TableCell>)
+          }
         </TableRow>
       </TableHead>
         <TableBody>

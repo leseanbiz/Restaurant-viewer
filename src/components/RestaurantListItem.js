@@ -6,10 +6,10 @@ export default function RestaurantListItem({restaurant: {name, phone, type, webs
 
  return (
   <TableRow >
-   <TableCell align="center"component="th" scope="row">{name}</TableCell>
-   <TableCell align="center">{phone}</TableCell>
-   <TableCell align="center">{website}</TableCell>
    <TableCell align="center">{type}</TableCell>
+   <TableCell align="center"component="th" scope="row">{name}</TableCell>
+   <TableCell align="center"><a href={`tel:${phone}`}>{phone}</a></TableCell>
+   <TableCell align="center"><a href={website}>{website}</a></TableCell>
   </TableRow>
  )
 }
