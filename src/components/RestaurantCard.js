@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function RestaurantCard({card: {name, phone, type, website, image}}) {
+export default function RestaurantCard({restaurant: {name, phone, type, website, image}}) {
   const classes = useStyles();
 
   return (

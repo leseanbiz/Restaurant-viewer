@@ -1,13 +1,20 @@
 import React from 'react';
 import RestaurantCard from '../components/RestaurantCard';
+import { connect } from 'react-redux';
 
-export default function RestaurantCards({restaurants}) {
- console.log(restaurants)
+const mapStateToProps = state => {
+  return { restaurants: state.restaurantsReducer}
+}
+
+function RestaurantCards({restaurants}) {
+ 
  return (
    <div>
-   {restaurants.map(card =>  <RestaurantCard card={card} key={card.id} />)
+   {restaurants.map(restaurant =>  <RestaurantCard {...{restaurant}} key={restaurant.id} />)
    }
    </div>
    
   );
 }
+
+export default connect(mapStateToProps)(RestaurantCards)

@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
-import { Grid, createMuiTheme, MuiThemeProvider, CssBaseline, Switch } from '@material-ui/core';
+import { Grid, createMuiTheme, MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import NavBar from './NavBar';
 import RestaurantCards from '../containers/RestaurantCards';
 import RestaurantList from '../containers/RestaurantList';
 import ViewCardsSwitch from '../containers/ViewCardsSwitch';
-import {restaurants, restaurantTypes} from '../data';
-import { connect } from 'react-redux';
+// import {restaurants, restaurantTypes} from '../data';
 
-const mapStateToProps = state => {
-  return { rests: state.restaurantsReducer}
-}
-
-function App({rests}) {
-
-  console.log("rests:", rests)
+function App() {
 
   const [viewMode, setViewMode ] = useState('light');
   const [viewCards, setViewCards] = useState(true);
+
   const toggleCards = () => {
     setViewCards(prev => !prev);
   };
+
   const handleViewChange = () => {
     viewMode === "light" ? setViewMode('dark') : setViewMode('light');
   }
@@ -42,9 +37,9 @@ function App({rests}) {
         <Grid container>
           {
             viewCards ?
-              <RestaurantCards restaurants={restaurants} restaurantTypes={restaurantTypes} />
+              <RestaurantCards />
               :
-              <RestaurantList restaurants={restaurants} restaurantTypes={restaurantTypes} />
+              <RestaurantList />
           }
         </Grid>
     </Grid>
@@ -52,5 +47,5 @@ function App({rests}) {
   );
 }
 
-export default connect(mapStateToProps)(App);
+export default App;
 
