@@ -7,12 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import RestaurantListItem from '../components/RestaurantListItem'
-import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
-
-const mapStateToProps = state => {
-  return { restaurants: state.restaurantsReducer}
-}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,9 +20,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function RestaurantsList({restaurants}) {
+function RestaurantsList({filteredRests}) {
   
-  const headers = Object.keys(restaurants[0]).filter(header => {
+  const headers = Object.keys(filteredRests[0]).filter(header => {
     return header === 'id' || header === 'color' || header === 'image' ? false : true;
   });
 
@@ -44,7 +39,7 @@ function RestaurantsList({restaurants}) {
         </TableRow>
       </TableHead>
         <TableBody>
-          {restaurants.map(restaurant => (
+          {filteredRests.map(restaurant => (
             <RestaurantListItem {...{restaurant}} key={restaurant.id} />
           ))}
         </TableBody>
@@ -53,4 +48,4 @@ function RestaurantsList({restaurants}) {
   );
 }
 
-export default connect(mapStateToProps)(RestaurantsList);
+export default RestaurantsList;

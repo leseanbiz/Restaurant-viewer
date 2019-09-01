@@ -1,10 +1,5 @@
 import React from 'react';
 import RestaurantCard from '../components/RestaurantCard';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => {
-  return { restaurants: state.restaurantsReducer}
-}
 
 function RestaurantCards({restaurants}) {
  
@@ -17,4 +12,4 @@ function RestaurantCards({restaurants}) {
   );
 }
 
-export default connect(mapStateToProps)(RestaurantCards)
+export default RestaurantCards;

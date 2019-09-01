@@ -7,21 +7,32 @@ import ViewCardsSwitch from '../containers/ViewCardsSwitch';
 import TypeFilter from '../containers/TypeFilter';
 import { connect } from 'react-redux';
 import { fetchRestaurants } from '../actions/restaurants'
-// import {restaurants, restaurantTypes} from '../data';
 
 const mapDispatchToProps = dispatch => {
   return {
-    doFetchRestaurants: () => dispatch(fetchRestaurants()),
+    doFetchRestaurants: type => dispatch(fetchRestaurants(type)),
   }
 }
 
-function App({doFetchRestaurants}) {
+const mapStateToProps = state => {
+  return { restaurants: state.restaurantsReducer,
+           filteredRestaurants: state.filterReducer
+          }
+}
+
+function App({ doFetchRestaurants, restaurants }) {
 
   const [viewMode, setViewMode ] = useState('light');
   const [viewCards, setViewCards] = useState(true);
+  const [type, setType] = React.useState('');
+  
+  function handleChange(event) {
+    setType(event.target.value);
+    doFetchRestaurants(event.target.value);
+}
 
   useEffect(() => {
-    doFetchRestaurants();
+    doFetchRestaurants('All');
   }, [])
 
   const toggleCards = () => {
@@ -34,7 +45,7 @@ function App({doFetchRestaurants}) {
 
   const theme = createMuiTheme({
     palette: {
-      type: viewMode, // Switching the dark mode on is a single property value change.
+      type: viewMode,
     },
   });
   
@@ -45,15 +56,15 @@ function App({doFetchRestaurants}) {
           <NavBar {...{viewMode, handleViewChange, viewCards, setViewCards}}/>
         <Grid container justify="center">
           {/* put switches radio buttons here */}
-          <TypeFilter />
+          <TypeFilter {...{type, handleChange}}/>
           <ViewCardsSwitch {...{viewCards, toggleCards}} />
         </Grid>
         <Grid container>
           {
             viewCards ?
-              <RestaurantCards />
+              <RestaurantCards {...{restaurants}}/>
               :
-              <RestaurantList />
+              <RestaurantList {...{restaurants}}/>
           }
         </Grid>
     </Grid>
@@ -61,5 +72,5 @@ function App({doFetchRestaurants}) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

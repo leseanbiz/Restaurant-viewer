@@ -2,13 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { restaurantTypes } from '../data';
-import { Category } from '@material-ui/icons';
-import { connect } from 'react-redux'
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -21,13 +19,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TypeFilter() {
+function TypeFilter({type, handleChange}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState('');
-  console.log(value);
-  function handleChange(event) {
-    setValue(event.target.value);
-  }
 
   return (
     <div className={classes.root}>
@@ -37,12 +30,14 @@ export default function TypeFilter() {
           aria-label="gender"
           name="gender1"
           className={classes.group}
-          value={value}
+          value={type}
           onChange={handleChange}
         >
-          {restaurantTypes.map(type => <FormControlLabel key={type.color} value={type.type} control={<Radio />} label={type.type} />)}
+          {restaurantTypes.map(restaurantType => <FormControlLabel key={restaurantType.color} value={restaurantType.type} control={<Radio />} label={restaurantType.type} />)}
         </RadioGroup>
       </FormControl>
     </div>
   );
 }
+
+export default TypeFilter;

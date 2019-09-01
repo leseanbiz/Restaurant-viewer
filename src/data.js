@@ -102,4 +102,7 @@ export let restaurantTypes = [
     type: 'Restaurant',
     color: '#e74c3c'
   },
+  {
+    type: 'All',
+  },
 ]
