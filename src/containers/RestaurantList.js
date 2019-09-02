@@ -20,9 +20,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function RestaurantsList({filteredRests}) {
+function RestaurantsList({restaurants}) {
   
-  const headers = Object.keys(filteredRests[0]).filter(header => {
+  const headers = Object.keys(restaurants[0]).filter(header => {
     return header === 'id' || header === 'color' || header === 'image' ? false : true;
   });
 
@@ -39,7 +39,7 @@ function RestaurantsList({filteredRests}) {
         </TableRow>
       </TableHead>
         <TableBody>
-          {filteredRests.map(restaurant => (
+          {restaurants.map(restaurant => (
             <RestaurantListItem {...{restaurant}} key={restaurant.id} />
           ))}
         </TableBody>

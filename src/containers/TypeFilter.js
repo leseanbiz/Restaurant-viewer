@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3),
   },
   group: {
-    margin: theme.spacing(1, 0),
+    // margin: theme.spacing(1, 0),
   },
 }));
 
@@ -33,7 +33,7 @@ function TypeFilter({type, handleChange}) {
           value={type}
           onChange={handleChange}
         >
-          {restaurantTypes.map(restaurantType => <FormControlLabel key={restaurantType.color} value={restaurantType.type} control={<Radio />} label={restaurantType.type} />)}
+          {restaurantTypes.map((restaurantType, i) => <FormControlLabel key={i} value={restaurantType.type} control={<Radio />} label={restaurantType.type} />)}
         </RadioGroup>
       </FormControl>
     </div>
