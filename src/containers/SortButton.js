@@ -11,7 +11,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import dropRight from 'lodash';
 import { connect } from 'react-redux';
-import { sortRestaurants } from '../actions/sort'
+import { sortRestaurants } from '../actions/sort';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 const options = ['Sort by id', 'Sort by name', 'Sort by type'];
 
@@ -27,6 +29,13 @@ const useStyles = makeStyles(theme => ({
     color: "#12103b"
   },
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: "#12103b"},
+    secondary: { main: "#fe443e"},
+  },
+});
 
 function SortButton({ doSortRestaurants, type }) {
 
@@ -45,8 +54,6 @@ function SortButton({ doSortRestaurants, type }) {
    setOpen(false);
   }
 
-  console.log(options)
-
   function handleToggle() {
     setOpen(prevOpen => !prevOpen);
   }
@@ -60,10 +67,11 @@ function SortButton({ doSortRestaurants, type }) {
 
   return (
     <div className={classes.root}>
-        <ButtonGroup variant="contained" color={"#12103b"} ref={anchorRef} aria-label="split button">
+      <ThemeProvider theme={theme}>
+        <ButtonGroup variant="contained" color="primary" ref={anchorRef} aria-label="split button">
           <Button>{options[selectedIndex]}</Button>
           <Button
-            color={'#fe443e'}
+            color="secondary"
             size="small"
             aria-owns={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
@@ -99,6 +107,7 @@ function SortButton({ doSortRestaurants, type }) {
             </Grow>
           )}
         </Popper>
+        </ThemeProvider>
         </div>
   );
 }

@@ -5,7 +5,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { restaurantTypes } from '../data';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,12 +13,12 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(3),
   },
-  group: {
-    // margin: theme.spacing(1, 0),
-  },
 }));
 
-function TypeFilter({type, handleChange}) {
+
+
+function TypeFilter({type, handleChange, distinctTypes}) {
+
   const classes = useStyles();
 
   return (
@@ -33,7 +32,7 @@ function TypeFilter({type, handleChange}) {
           value={type}
           onChange={handleChange}
         >
-          {restaurantTypes.map((restaurantType, i) => <FormControlLabel key={i} value={restaurantType.type} control={<Radio />} label={restaurantType.type} />)}
+          {distinctTypes.map((restaurantType) => <FormControlLabel key={restaurantType} value={restaurantType} control={<Radio />} label={restaurantType} />)}
         </RadioGroup>
       </FormControl>
     </div>

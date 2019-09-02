@@ -8,6 +8,7 @@ import TypeFilter from '../containers/TypeFilter';
 import { connect } from 'react-redux';
 import { fetchRestaurants } from '../actions/restaurants';
 import SortButton from '../containers/SortButton';
+import uniq from 'lodash/uniq';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -26,11 +27,13 @@ function App({ doFetchRestaurants, restaurants }) {
   const [viewMode, setViewMode ] = useState('light');
   const [viewCards, setViewCards] = useState(true);
   const [type, setType] = React.useState('');
+  const distinctTypes = uniq(restaurants.map(el => el.type));
+  distinctTypes.push('All');
 
   function handleChange(event) {
     setType(event.target.value);
     doFetchRestaurants(event.target.value);
-}
+  }
 
   useEffect(() => {
     doFetchRestaurants('All');
@@ -52,12 +55,11 @@ function App({ doFetchRestaurants, restaurants }) {
   
   return (
     <MuiThemeProvider theme={theme}>
-      {/* <CssBaseline /> */}
       <Grid container spacing={3}>
           <NavBar {...{viewMode, handleViewChange, viewCards, setViewCards}}/>
         <Grid container justify="center">
           {/* put switches radio buttons here */}
-          <TypeFilter {...{type, handleChange}}/>
+          <TypeFilter {...{type, handleChange, distinctTypes}}/>
           <ViewCardsSwitch {...{viewCards, toggleCards}} />
           <SortButton {...{type}}/>
         </Grid>

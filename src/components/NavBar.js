@@ -14,8 +14,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
   },
   title: {
-    // marginLeft: theme.spacing(2),
-    // flexGrow: 1,
     display: "block",
     maxWidth:"230px",
     maxHeight:"95px",
@@ -24,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     height: "auto",
   },
   viewModeIcon: {
-    marginLeft: theme.spacing(107),
     color: '#fff',
     '&:hover': {
       color:'#fe443e'
@@ -47,7 +44,6 @@ export default function NavBar({viewMode, handleViewChange}) {
       <ThemeProvider theme={theme}>
         <AppBar position="static">
           <Toolbar>
-            <img src={logo} className={classes.title} alt="foureyes-logo" />
             <Tooltip title={viewToolTip} aria-label={viewToolTip}>
               <IconButton
                 aria-label={viewToolTip}
@@ -57,6 +53,7 @@ export default function NavBar({viewMode, handleViewChange}) {
                   <Highlight />
               </IconButton>
             </Tooltip>
+            <img src={logo} className={classes.title} alt="foureyes-logo" />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
