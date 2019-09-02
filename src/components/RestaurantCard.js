@@ -12,6 +12,8 @@ import { red } from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
   card: {
     width: 345,
+    // marginTop: '20px',
+    marginLeft: '15%',
   },
   media: {
     height: 0,
@@ -24,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function RestaurantCard({restaurant: {name, phone, type, website, image, color}}) {
   const classes = useStyles();
-  console.log(color)
   return (
     <Card className={classes.card}>
       <CardHeader

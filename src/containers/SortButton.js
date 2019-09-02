@@ -45,6 +45,8 @@ function SortButton({ doSortRestaurants, type }) {
    setOpen(false);
   }
 
+  console.log(options)
+
   function handleToggle() {
     setOpen(prevOpen => !prevOpen);
   }

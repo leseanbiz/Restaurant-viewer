@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
@@ -24,10 +24,10 @@ function RestaurantCards({restaurants}) {
   const classes = useStyles();
  
  return (
-  <Grid container justify="space-evenly">
+  <Grid container justify="center" direction="row" alignItems="center" spacing={2}>
    {
     restaurants.map(restaurant => (
-      <GridList cellHeight="auto" key={restaurant.id} className={classes.gridList} spacing={3}>
+      <GridList cellHeight="auto" key={restaurant.id} className={classes.gridList}>
         <RestaurantCard {...{restaurant}}  />
       </GridList>
     ))
