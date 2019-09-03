@@ -1,42 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { fetchRestaurants } from '../actions/restaurants';
 import NavBar from './NavBar';
+import SortButton from '../containers/SortButton';
 import RestaurantCards from '../containers/RestaurantCards';
 import RestaurantList from '../containers/RestaurantList';
 import ViewCardsSwitch from '../containers/ViewCardsSwitch';
 import TypeFilter from '../containers/TypeFilter';
-import { connect } from 'react-redux';
-import { fetchRestaurants } from '../actions/restaurants';
-import SortButton from '../containers/SortButton';
-import uniq from 'lodash/uniq';
+import { filterRestaurants } from '../actions/filter';
+import logo from '../foureyes-logo.svg';
 
 const mapDispatchToProps = dispatch => {
   return {
-    doFetchRestaurants: type => dispatch(fetchRestaurants(type)),
+    doFetchRestaurants: () => dispatch(fetchRestaurants()),
+    doFilterRestaurants: type => dispatch(filterRestaurants(type))
   }
 }
 
 const mapStateToProps = state => {
   return { 
-            restaurants: state.restaurantsReducer,
+            unfilteredRestaurants: state.restaurantsReducer.restaurants,
+            filteredRestaurants: state.restaurantsReducer.filtered,
+            loading: state.restaurantsReducer.loading,
+            filterType: state.restaurantsReducer.filterType,
+            types: state.restaurantsReducer.types
           }
 }
 
-function App({ doFetchRestaurants, restaurants }) {
+function App({ doFetchRestaurants, doFilterRestaurants, unfilteredRestaurants, loading, filteredRestaurants, filterType, types }) {
 
   const [viewMode, setViewMode ] = useState('light');
   const [viewCards, setViewCards] = useState(true);
-  const [type, setType] = React.useState('');
-  const distinctTypes = uniq(restaurants.map(el => el.type));
-  distinctTypes.push('All');
+
+  const restaurants = filterType === "All" ? unfilteredRestaurants : filteredRestaurants;
 
   function handleChange(event) {
-    setType(event.target.value);
-    doFetchRestaurants(event.target.value);
+    doFilterRestaurants(event.target.value);
   }
 
   useEffect(() => {
-    doFetchRestaurants('All');
+    doFetchRestaurants();
   }, [])
   
   const toggleCards = () => {
@@ -52,25 +56,34 @@ function App({ doFetchRestaurants, restaurants }) {
       type: viewMode,
     },
   });
-  
+
   return (
+    
     <MuiThemeProvider theme={theme}>
-      <Grid container spacing={3}>
-          <NavBar {...{viewMode, handleViewChange, viewCards, setViewCards}}/>
-        <Grid container justify="center">
-          <TypeFilter {...{type, handleChange, distinctTypes}}/>
-          <ViewCardsSwitch {...{viewCards, toggleCards}} />
-          <SortButton {...{type}}/>
+      {
+        loading ? 
+        <div>
+          <img src={logo} alt="logo" />
+          <h3>Loading...</h3>
+        </div>   
+        :
+        <Grid container spacing={3}>
+            <NavBar {...{viewMode, handleViewChange, viewCards, setViewCards}}/>
+          <Grid container justify="center">
+            <TypeFilter {...{filterType, handleChange, types}}/>
+            <ViewCardsSwitch {...{viewCards, toggleCards}} />
+            <SortButton {...{filterType}}/>
+          </Grid>
+          <Grid container spacing={2}>
+            {
+              viewCards ?
+                <RestaurantCards {...{restaurants}}/>
+                :
+                <RestaurantList {...{restaurants}}/>
+            }
+          </Grid>
         </Grid>
-        <Grid container spacing={2}>
-          {
-            viewCards ?
-              <RestaurantCards {...{restaurants}}/>
-              :
-              <RestaurantList {...{restaurants}}/>
-          }
-        </Grid>
-    </Grid>
+      }
   </MuiThemeProvider>
   );
 }

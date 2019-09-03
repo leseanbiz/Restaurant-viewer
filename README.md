@@ -7,27 +7,27 @@
 
 ### To run project:
 1. Open terminal
-2. use 'git clone {url}' to clone from GitHub repo
-3. Run 'yarn install' to get all dependencies
-4. Navigate to the root directory of the repo 'cd your-location/adpearence-restaurants'
-5. Run 'node server.js' to start the server to provide the supplied data
-6. In a new terminal tab, run 'yarn start' to launch the front-end of the application
+2. Navigate to the directory whre you want to save the project folder
+3. use 'git clone https://github.com/leseanbiz/Restaurant-viewer' to clone from GitHub repo
+4. Run 'yarn install' to get all dependencies
+5. Navigate to the root directory of the repo 'cd your-location/adpearence-restaurants'
+6. Run 'node server.js' to start the server to provide the supplied data
+7. In a new terminal tab, run 'yarn start' to launch the front-end of the application
 
 ### Project notes:
 * bootstrapped with create-react-app.
-* Material-UI for layout and components
+* Material-UI for responsive layout and components
 * Redux for state management combined with minimal hooks
 * Redux-saga for data fetching
-* Node.js and ExpressJS use to establish server to provide the supplied data
+* Node.js and ExpressJS use to spin-up server to provide the supplied data
 
 ### Current Issues:
-* Amount of filters change when selecting an option
+* None that I am aware of.
 
 ### Future work:
-* Find a better solution for data filtering
-* Move data merging to back-end
+* Move data merging and cleaning(urls) to back-end
 * Cleaner grid alignment
 * Put interactive UI pieces in left side drawer
-* Use custom icons in card avatar instead of 'type' initial
-* Append 'https://' to URLs that are missing it
 * More efficient use of Material-UI theming
+* Complete 'Dark Mode'
+* Testing

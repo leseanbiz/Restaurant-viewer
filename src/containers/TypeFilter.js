@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function TypeFilter({type, handleChange, distinctTypes}) {
+function TypeFilter({filterType, handleChange, types}) {
 
   const classes = useStyles();
 
@@ -27,10 +27,10 @@ function TypeFilter({type, handleChange, distinctTypes}) {
           aria-label="gender"
           name="gender1"
           className={classes.group}
-          value={type}
+          value={filterType}
           onChange={handleChange}
         >
-          {distinctTypes.map((restaurantType) => <FormControlLabel key={restaurantType} value={restaurantType} control={<Radio />} label={restaurantType} />)}
+          {types.map((type) => <FormControlLabel key={type.type} value={type.type} control={<Radio style={{color: type.color}} />} label={type.type} />)}
         </RadioGroup>
       </FormControl>
     </div>

@@ -9,13 +9,10 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import dropRight from 'lodash';
 import { connect } from 'react-redux';
 import { sortRestaurants } from '../actions/sort';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-
-const options = ['Sort by id', 'Sort by name', 'Sort by type'];
 
 const mapDispatchToProps = dispatch => {
  return {
@@ -37,19 +34,17 @@ const theme = createMuiTheme({
   },
 });
 
-function SortButton({ doSortRestaurants, type }) {
-
+function SortButton({ doSortRestaurants, filterType }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+  const options = filterType === "All" ? ['Sort by id', 'Sort by name', 'Sort by type'] : ['Sort by id', 'Sort by name'];
+
   function handleMenuItemClick(event, index) {
    doSortRestaurants(options[index]);
-   if(type !== "All" || type !== ''){
-    dropRight(options, 1);
-   }
    setSelectedIndex(index);
    setOpen(false);
   }
@@ -94,7 +89,6 @@ function SortButton({ doSortRestaurants, type }) {
                     {options.map((option, index) => (
                       <MenuItem
                         key={option}
-                        // disabled={}
                         selected={index === selectedIndex}
                         onClick={event => handleMenuItemClick(event, index)}
                       >
@@ -107,8 +101,8 @@ function SortButton({ doSortRestaurants, type }) {
             </Grow>
           )}
         </Popper>
-        </ThemeProvider>
-        </div>
+      </ThemeProvider>
+    </div>
   );
 }
 

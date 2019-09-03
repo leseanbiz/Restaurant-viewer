@@ -3,19 +3,20 @@ import { ADD_RESTAURANTS } from '../constants/actionTypes';
 
 export function* fetchRestaurantsSagaWorker(action) {
     
- const json = yield fetch('http://localhost:4000/')
+    const json = yield fetch('http://localhost:4000/')
                .then(response => response.json());
 
- const mergedRestaurantData = json.restaurants.map(restaurant => ({
-     ...json.restaurantTypes.find((restaurantType) => (restaurant.type === restaurantType.type)),
-     ...restaurant
- }))
+    const cleanedData =  json.restaurants.map(el => {
+        if(el.website === null){
+            return el
+        }
+        return el.website.includes('http') ? el : {...el, website: `http://${el.website}`}
+    })
 
- const filteredRestaurants = mergedRestaurantData.filter(el => {
-    return el.type === action.payload ? true : false;
- })
+    const mergedRestaurantData = cleanedData.map(restaurant => ({
+        ...json.restaurantTypes.find((restaurantType) => (restaurant.type === restaurantType.type)),
+        ...restaurant
+    }))
 
- const returnData = action.payload === 'All' ? mergedRestaurantData : filteredRestaurants
-
- yield put({ type: ADD_RESTAURANTS, payload: returnData});
+ yield put({ type: ADD_RESTAURANTS, payload: mergedRestaurantData, types: json.restaurantTypes});
 }

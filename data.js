@@ -102,6 +102,10 @@ let restaurantTypes = [
     type: 'Restaurant',
     color: '#e74c3c'
   },
+  {
+    type: 'All',
+    color: '#000'
+  }
 ]
 
 module.exports={restaurants, restaurantTypes}

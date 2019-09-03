@@ -6,4 +6,4 @@ const port = 4000;
 
 app.get('/', cors(), (req, res) => res.send(data))
 
-app.listen(port, () => console.log(`Restaurant data server listening on port ${port}!`))
+app.listen(port, () => console.info(`Restaurant data server listening on port ${port}!`));
