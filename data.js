@@ -1,4 +1,4 @@
-let restaurants = [
+const restaurants = [
   {
     id:1,
     name: 'Breken Kitchen',
@@ -81,7 +81,7 @@ let restaurants = [
   },
 ];
 
-let restaurantTypes = [
+const restaurantTypes = [
   {
     type: 'Brewpub',
     color: '#1abc9c'

@@ -12,10 +12,10 @@ export default function RestaurantListItem({restaurant: {name, phone, type, webs
    <TableCell align="center">
     {
       website ? 
-      <a href={website}>{website}</a> 
+      <a href={website}>{name}</a> 
       : 
       <a href={`https://www.google.com/search?q=${name}`}>{name}</a>
-     }
+    }
     </TableCell>
   </TableRow>
  )

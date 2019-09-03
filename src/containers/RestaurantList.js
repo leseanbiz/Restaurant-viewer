@@ -32,10 +32,11 @@ function RestaurantsList({restaurants}) {
       <Table className={classes.table}>
       <TableHead>
         <TableRow>
-          {headers.map((header, i) => <TableCell variant="head" size="medium" align="center" key={i}>
-                                        <Typography variant="h6">{header.toUpperCase()}</Typography>
-                                      </TableCell>)
-          }
+          {headers.map(header => 
+            <TableCell variant="head" size="medium" align="center" key={header}>
+              <Typography variant="h6">{header.toUpperCase()}</Typography>
+            </TableCell>
+          )}
         </TableRow>
       </TableHead>
         <TableBody>
