@@ -15,8 +15,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 function TypeFilter({type, handleChange, distinctTypes}) {
 
   const classes = useStyles();

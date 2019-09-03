@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, createMuiTheme, MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import { Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import NavBar from './NavBar';
 import RestaurantCards from '../containers/RestaurantCards';
 import RestaurantList from '../containers/RestaurantList';
@@ -58,7 +58,6 @@ function App({ doFetchRestaurants, restaurants }) {
       <Grid container spacing={3}>
           <NavBar {...{viewMode, handleViewChange, viewCards, setViewCards}}/>
         <Grid container justify="center">
-          {/* put switches radio buttons here */}
           <TypeFilter {...{type, handleChange, distinctTypes}}/>
           <ViewCardsSwitch {...{viewCards, toggleCards}} />
           <SortButton {...{type}}/>
