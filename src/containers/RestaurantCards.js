@@ -25,11 +25,11 @@ function RestaurantCards({restaurants}) {
   return (
     <Grid container justify="center" direction="row" alignItems="center" spacing={2}>
     {
-      restaurants.map(restaurant => (
+      restaurants.map(restaurant => 
         <GridList cellHeight="auto" key={restaurant.id} className={classes.gridList}>
           <RestaurantCard {...{restaurant}}  />
         </GridList>
-      ))
+      )
     }
     </Grid>
   );

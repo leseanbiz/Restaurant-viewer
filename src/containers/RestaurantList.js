@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
 
 function RestaurantsList({restaurants}) {
   
-  const headers = Object.keys(restaurants[0]).filter(header => {
-    return header === 'id' || header === 'color' || header === 'image' ? false : true;
-  });
+  const headers = Object.keys(restaurants[0]).filter(header => 
+    header === 'id' || header === 'color' || header === 'image' ? false : true
+  );
 
   const classes = useStyles();
   return (

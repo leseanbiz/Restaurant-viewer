@@ -14,11 +14,7 @@ import { sortRestaurants } from '../actions/sort';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-const mapDispatchToProps = dispatch => {
- return {
-  doSortRestaurants: value => dispatch(sortRestaurants(value))
- }
-}
+const mapDispatchToProps = dispatch => ({doSortRestaurants: value => dispatch(sortRestaurants(value))})
 
 const useStyles = makeStyles(theme => ({
   root: {
