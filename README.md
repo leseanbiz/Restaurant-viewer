@@ -1,4 +1,4 @@
-# Foureyes - Frontend Dev Test
+# Restaurant viewer
 
 ### Candidate:
 * LeSean Johnson
